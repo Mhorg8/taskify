@@ -2,10 +2,10 @@
 import Link from "next/link";
 import React from "react";
 import Menu from "./Menu";
-import { useAppDispatch, useAppSelector } from "@/app/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { AnimatePresence, motion } from "framer-motion";
 import { IoCloseSharp } from "react-icons/io5";
-import { toggleSidebarStatus } from "@/app/lib/redux/theme";
+import { toggleSidebarStatus } from "@/lib/redux/theme";
 
 const MobileMenu = () => {
   const animation = {
