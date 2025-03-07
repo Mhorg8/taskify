@@ -7,6 +7,12 @@
   @apply mx-auto px-5 md:px-7;
 }
 
+@layer components {
+  .hoverEffect {
+    @apply transition-all duration-300;
+  }
+}
+
 @theme {
   --color-red: #ef6461;
   --color-yellow: #e4b363;

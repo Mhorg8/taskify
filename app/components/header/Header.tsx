@@ -13,7 +13,7 @@ const Header = () => {
         </Link>
 
         {/* MENU */}
-        <div>
+        <div className="hidden md:block">
           <Menu />
         </div>
 
