@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import ActionView from "./ActionView";
 import Menu from "./Menu";
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   return (
@@ -19,6 +20,8 @@ const Header = () => {
 
         {/* ACTIONS */}
         <ActionView />
+        {/*  MOBILE MENU */}
+        <MobileMenu />
       </div>
     </div>
   );

@@ -1,14 +1,18 @@
 "use client";
 import { HeaderLinks } from "@/app/constant";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 import React from "react";
 
-const Menu = () => {
-  const location = window.location.pathname;
+interface Props {
+  customStyle?: string;
+}
+
+const Menu = ({ customStyle }: Props) => {
+  const location = usePathname();
 
   return (
-    <ul className="flex items-center justify-center gap-4">
+    <ul className={`${customStyle} flex items-center justify-center gap-4`}>
       {HeaderLinks.map((item) => (
         <Link
           className={`${

@@ -1,13 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-interface InitialState {}
+interface InitialState {
+  sidebarStatus: boolean;
+}
 
-const initialState: InitialState = {};
+const initialState: InitialState = {
+  sidebarStatus: false,
+};
 
 const themeSlice = createSlice({
   name: "theme",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleSidebarStatus(state) {
+      state.sidebarStatus = !state.sidebarStatus;
+    },
+  },
 });
 
-export const {} = themeSlice.actions;
+export const {toggleSidebarStatus} = themeSlice.actions;
 export default themeSlice.reducer;
