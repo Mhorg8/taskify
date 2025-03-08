@@ -9,7 +9,7 @@ const RegisterPage = () => {
     <div className="w-full h-full lg:h-[calc(100dvh-80px)] py-5">
       <div className="container flex items-center gap-3 w-full h-full">
         {/* left section */}
-        <div className="w-full md:w-1/2 flex flex-col justify-start items-center h-full">
+        <div className="w-full md:w-1/2 flex flex-col justify-start items-center h-full z-20 py-4">
           <h2 className="text-4xl font-extrabold mt-10">
             Welcome to Task<span className="text-red">pro</span>
           </h2>
@@ -18,7 +18,7 @@ const RegisterPage = () => {
             with Taskpro App. Get start for free.
           </p>
 
-          <form className="mt-10 w-[350px] md:w-[400px] lg:w-[500px] flex flex-col items-center justify-between h-full">
+          <form className="mt-10 w-[320px] md:w-[400px] lg:w-[500px] flex flex-col items-center justify-between h-full">
             <div className="flex flex-col items-center justify-between gap-5">
               <Input className="w-full" placeholder="Email" type="email" />
               <Input className="w-full" placeholder="Username" type="text" />
@@ -28,9 +28,10 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="false"
               />
-              <CustomButton className="w-full font-bold text-lg rounded-full text-white py-3 cursor-pointer mt-5">
-                Create
-              </CustomButton>
+              <CustomButton
+                text="  Create"
+                className="w-full font-bold text-lg rounded-full text-white py-3 cursor-pointer mt-5"
+              />
 
               <div className="relative w-full h-[2px] bg-black/40 my-7">
                 <p className="absolute -top-3 left-1/2 bg-[#fff] -translate-x-1/2 ">
@@ -59,9 +60,15 @@ const RegisterPage = () => {
           </form>
         </div>
         {/* right section */}
-        <div className="absolute top-0 right-0 w-full h-full md:static md:w-1/2 bg-red rounded-2xl">
-          <div className="relative w-full h-full">
-            {/* <Image src="" alt="" fill sizes="fill" /> */}s
+        <div className="absolute top-0 right-0 w-full h-full md:static md:w-1/2 rounded-2xl">
+          <div className="relative w-full h-full md:bg-white">
+            <Image
+              className="block "
+              src="/register.jpg"
+              alt=""
+              fill
+              sizes="fill"
+            />
           </div>
         </div>
       </div>

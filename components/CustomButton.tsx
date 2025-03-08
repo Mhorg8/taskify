@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
+  text: string;
   click?: () => void;
   className?: string;
   bgColor?: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const CustomButton = ({
+  text,
   children,
   click,
   className,
@@ -34,10 +36,9 @@ const CustomButton = ({
       <button
         onClick={click}
         style={{ backgroundColor: bgColor ? bgColor : "#000" }}
-        className={
-          (cn("dark:bg-white  text-white px-5 py-2 rounded-md font-semibold cursor-pointer" ),className)  
-        }
+        className={`${className} text-[#fff] px-5 py-2 rounded-md font-bold cursor-pointer hover:bg-black/50 hoverEffect`}
       >
+        {text}
         {children}
       </button>
     );
