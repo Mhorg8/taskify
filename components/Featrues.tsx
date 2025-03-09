@@ -1,5 +1,4 @@
 "use client";
-import { animate } from "framer-motion";
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { motion } from "framer-motion";

@@ -19,6 +19,9 @@
   .fadeIn {
     animation: fadeIn 2s ease-in;
   }
+  .cards__header-tab {
+    @apply w-full py-3 text-center h-full hover:bg-zinc-300 cursor-pointer font-semibold;
+  }
 }
 
 @theme {
