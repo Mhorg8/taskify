@@ -1,4 +1,3 @@
-import { staticTasks } from "@/constant";
 import { Task } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -8,7 +7,7 @@ interface InitialState {
 }
 const initialState: InitialState = {
   draggedTask: null,
-  tasks: staticTasks,
+  tasks: [],
 };
 
 const tasksSlice = createSlice({
@@ -28,21 +27,25 @@ const tasksSlice = createSlice({
         );
       }
     },
-    changeToInprogress: (state, action: PayloadAction<number>) => {
+    changeToInprogress: (state, action: PayloadAction<string>) => {
       state.tasks.map((task) =>
         task.id === action.payload ? (task.status = "inprogress") : task
       );
     },
-    changeToFinished: (state, action: PayloadAction<number>) => {
+    changeToFinished: (state, action: PayloadAction<string>) => {
       state.tasks.map((task) =>
         task.id === action.payload ? (task.status = "finished") : task
       );
     },
-    handleDeleteTask: (state, action: PayloadAction<number>) => {
+    handleDeleteTask: (state, action: PayloadAction<string>) => {
       console.log("deleted");
       state.tasks = state.tasks.map((task) =>
         task.id === action.payload ? { ...task, status: "deleted" } : task
       );
+    },
+
+    addNewTask: (state, action: PayloadAction<Task>) => {
+      state.tasks.unshift(action.payload);
     },
   },
 });
@@ -53,5 +56,6 @@ export const {
   changeToInprogress,
   changeToFinished,
   handleDeleteTask,
+  addNewTask,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

@@ -6,6 +6,7 @@ import { changeTaskStatus } from "@/lib/redux/tasksSlice";
 import TodoView from "./TodoView";
 import DropArea from "./DropArea";
 import { Column } from "@/types";
+import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
 
 interface Props {
   column: Column;
@@ -29,7 +30,9 @@ const StatusColumn = ({ column }: Props) => {
       <h3 className="text-2xl font-bold text-center">{column.title}</h3>
       {column.status === "created" ? (
         <div className="w-full h-[200px] mt-3 border border-dashed border-zinc-400 flex items-center justify-center hover:bg-zinc-200/80 hoverEffect">
-          <LuPlus size={38} cursor="pointer" />
+          <button onClick={() => dispatch(toggleOpenNewTaskModal())}>
+            <LuPlus size={38} cursor="pointer" />
+          </button>
         </div>
       ) : null}
       {tasks
