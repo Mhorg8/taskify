@@ -3,7 +3,12 @@ import React from "react";
 import { LuCheck, LuCheckCheck, LuDelete, LuTrash } from "react-icons/lu";
 import { Task } from "@/types";
 import { useAppDispatch } from "@/lib/redux/hooks";
-import { setActiveTask } from "@/lib/redux/tasksSlice";
+import {
+  changeToFinished,
+  changeToInprogress,
+  handleDeleteTask,
+  setActiveTask,
+} from "@/lib/redux/tasksSlice";
 
 interface Props {
   task: Task;
@@ -12,30 +17,51 @@ interface Props {
 const TodoView = ({ task }: Props) => {
   const { title, desc, time } = task;
   const dispatch = useAppDispatch();
-
   const handleDragStart = () => {
-    dispatch(setActiveTask(task)); // Set the dragged task in the Redux state
+    dispatch(setActiveTask(task));
   };
 
   return (
     <div
       draggable
       onDragStart={handleDragStart}
-      className="w-full h-[200px] mt-3 border border-zinc-200 flex flex-col items-start justify-between hover:bg-zinc-200/80 hoverEffect py-5 px-4"
+      className={`border-r-2 ${
+        task.status === "created"
+          ? "border-r-red"
+          : task.status === "inprogress"
+          ? "border-r-blue-400"
+          : "border-r-green-500"
+      }  w-full h-[200px] mt-3 border border-zinc-200 flex flex-col items-start justify-between
+       hover:bg-zinc-200/80 hoverEffect py-5 px-4 cursor-grab`}
     >
       <div className="flex items-center justify-between w-full">
         <h3 className="line-clamp-1 text-lg md:text-lg lg:text-2xl font-bold flex-1">
           {title}
         </h3>
-        <button className="cursor-pointer">
+        <>
           {task.status === "created" ? (
-            <LuCheck size={24} />
+            <button
+              className="cursor-pointer"
+              onClick={() => dispatch(changeToInprogress(task.id))}
+            >
+              <LuCheck size={24} />
+            </button>
           ) : task.status === "inprogress" ? (
-            <LuCheckCheck size={24} />
+            <button
+              className="cursor-pointer"
+              onClick={() => dispatch(changeToFinished(task.id))}
+            >
+              <LuCheckCheck size={24} />
+            </button>
           ) : (
-            <LuTrash size={24} />
+            <button
+              className="cursor-pointer"
+              onClick={() => dispatch(handleDeleteTask(task.id))}
+            >
+              <LuTrash size={24} />
+            </button>
           )}
-        </button>
+        </>
       </div>
       <p className="mb-3 lg:mb-0 text-start line-clamp-2 text-sm md:text-base mt-1 text-gray-700">
         {desc}

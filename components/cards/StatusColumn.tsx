@@ -17,7 +17,7 @@ const StatusColumn = ({ column }: Props) => {
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    dispatch(changeTaskStatus(column.status)); // Update task status when dropped
+    dispatch(changeTaskStatus(column.status));
   };
 
   return (

@@ -20,18 +20,38 @@ const tasksSlice = createSlice({
     },
     changeTaskStatus: (state, action: PayloadAction<string>) => {
       const { draggedTask } = state;
-
       if (draggedTask) {
-        // Map over tasks and update the status of the dragged task
         state.tasks = state.tasks.map((task) =>
           task.id === draggedTask.id
-            ? { ...task, status: action.payload } // Update the status with the new one from the payload
+            ? { ...task, status: action.payload }
             : task
         );
       }
     },
+    changeToInprogress: (state, action: PayloadAction<number>) => {
+      state.tasks.map((task) =>
+        task.id === action.payload ? (task.status = "inprogress") : task
+      );
+    },
+    changeToFinished: (state, action: PayloadAction<number>) => {
+      state.tasks.map((task) =>
+        task.id === action.payload ? (task.status = "finished") : task
+      );
+    },
+    handleDeleteTask: (state, action: PayloadAction<number>) => {
+      console.log("deleted");
+      state.tasks = state.tasks.map((task) =>
+        task.id === action.payload ? { ...task, status: "deleted" } : task
+      );
+    },
   },
 });
 
-export const { setActiveTask, changeTaskStatus } = tasksSlice.actions;
+export const {
+  setActiveTask,
+  changeTaskStatus,
+  changeToInprogress,
+  changeToFinished,
+  handleDeleteTask,
+} = tasksSlice.actions;
 export default tasksSlice.reducer;

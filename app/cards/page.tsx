@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import StatusColumn from "@/components/cards/StatusColumn";
 import { columns } from "@/constant";
 
-
 const CardsPage = () => {
   return (
     <div className="h-[calc(100dvh-80px)] overflow-hidden">
