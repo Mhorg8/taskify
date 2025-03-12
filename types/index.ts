@@ -12,3 +12,7 @@ export interface Column {
   status: string;
   borderColor?: string;
 }
+
+export interface TaskStatus {
+  activeTab: "created" | "inprogress" | "finished";
+}

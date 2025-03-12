@@ -1,13 +1,15 @@
-import { Task } from "@/types";
+import { Task, TaskStatus } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   draggedTask: Task | null;
   tasks: Task[];
+  activeTab: string;
 }
 const initialState: InitialState = {
   draggedTask: null,
   tasks: [],
+  activeTab: "created",
 };
 
 const tasksSlice = createSlice({
@@ -47,6 +49,10 @@ const tasksSlice = createSlice({
     addNewTask: (state, action: PayloadAction<Task>) => {
       state.tasks.unshift(action.payload);
     },
+
+    toggleActiveTabChange: (state, action: PayloadAction<string>) => {
+      state.activeTab = action.payload;
+    },
   },
 });
 
@@ -57,5 +63,6 @@ export const {
   changeToFinished,
   handleDeleteTask,
   addNewTask,
+  toggleActiveTabChange,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

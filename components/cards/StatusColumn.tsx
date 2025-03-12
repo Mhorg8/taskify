@@ -10,9 +10,10 @@ import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
 
 interface Props {
   column: Column;
+  createTaskClassName?: string;
 }
 
-const StatusColumn = ({ column }: Props) => {
+const StatusColumn = ({ column, createTaskClassName }: Props) => {
   const tasks = useAppSelector((state) => state.tasks.tasks);
   const dispatch = useAppDispatch();
 
@@ -27,9 +28,13 @@ const StatusColumn = ({ column }: Props) => {
       onDragOver={(e: DragEvent<HTMLDivElement>) => e.preventDefault()}
       onDrop={handleDrop}
     >
-      <h3 className="text-2xl font-bold text-center">{column.title}</h3>
+      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-center">
+        {column.title}
+      </h3>
       {column.status === "created" ? (
-        <div className="w-full h-[200px] mt-3 border border-dashed border-zinc-400 flex items-center justify-center hover:bg-zinc-200/80 hoverEffect">
+        <div
+          className={`${createTaskClassName} w-full h-[200px] mt-3 border border-dashed border-zinc-400 flex items-center justify-center hover:bg-zinc-200/80 hoverEffect`}
+        >
           <button onClick={() => dispatch(toggleOpenNewTaskModal())}>
             <LuPlus size={38} cursor="pointer" />
           </button>
