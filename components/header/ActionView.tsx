@@ -33,7 +33,7 @@ const ActionView = () => {
             setTheme(darkmood ? "dark" : "light");
           }}
         />
-        <Label>{darkmood ? "Night" : "Dark"}</Label>
+        <Label>{darkmood ? "Dark" : "Light"}</Label>
       </div>
       <button
         onClick={() => dispatch(toggleSidebarStatus())}

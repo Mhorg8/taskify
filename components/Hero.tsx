@@ -13,7 +13,7 @@ const Hero = () => {
           life.
         </p>
         <div className="fadeIn delay-1000">
-          <CustomButton text=" Get Start" className="" />
+          <CustomButton text=" Get Start" className="dark:bg-white" />
         </div>
       </div>
     </div>

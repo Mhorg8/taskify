@@ -58,7 +58,7 @@ const Features = () => {
   };
 
   return (
-    <div className="bg-black text-white flex items-center justify-center overflow-hidden h-[300px]">
+    <div className="bg-black dark:bg-white dark:text-black text-white flex items-center justify-center overflow-hidden h-[300px]">
       <div className="w-full h-full flex flex-col items-center justify-center relative gap-3">
         <motion.div
           variants={animation}
@@ -74,7 +74,7 @@ const Features = () => {
         </motion.div>
 
         {/* Arrow buttons */}
-        <div className="absolute top-1/2 -translate-y-1/2 right-[15%] text-white flex flex-col gap-5">
+        <div className="absolute top-1/2 -translate-y-1/2 right-[15%] text-white dark:text-black flex flex-col gap-5">
           <button
             onClick={handlePrevious}
             className="hover:scale-125 hoverEffect cursor-pointer"

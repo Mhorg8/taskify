@@ -35,8 +35,8 @@ const CustomButton = ({
     return (
       <button
         onClick={click}
-        style={{ backgroundColor: bgColor ? bgColor : "#000" }}
-        className={`${className} text-[#fff] px-5 py-2 rounded-md font-bold cursor-pointer hover:bg-black/50 hoverEffect`}
+     
+        className={`${className}  dark:text-black dark:hover:bg-white/80 text-[#fff] px-5 py-2 rounded-md font-bold cursor-pointer hover:bg-black/50 hoverEffect `}
       >
         {text}
         {children}
