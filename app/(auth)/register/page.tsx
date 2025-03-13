@@ -6,8 +6,10 @@ import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
 import { FaGoogle, FaApple, FaFacebook } from "react-icons/fa6";
 import CustomInput from "@/components/CustomInput";
+import { useAppSelector } from "@/lib/redux/hooks";
 
 const RegisterPage = () => {
+  const darkmood = useAppSelector((state) => state.theme.darkmood);
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
@@ -16,7 +18,7 @@ const RegisterPage = () => {
     <div className="w-full h-full lg:h-[calc(100dvh-80px)] py-5">
       <div className="container flex items-center gap-3 w-full h-full">
         {/* left section */}
-        <div className="w-full md:w-1/2 flex flex-col justify-start items-center h-full z-20 py-4">
+        <div className="w-full lg:w-1/2 flex flex-col justify-start items-center h-full z-20 py-4">
           <h2 className="text-4xl font-extrabold mt-10">
             Welcome to Task<span className="text-red">pro</span>
           </h2>
@@ -81,15 +83,25 @@ const RegisterPage = () => {
           </form>
         </div>
         {/* right section */}
-        <div className="absolute top-0 right-0 w-full h-full md:static md:w-1/2 rounded-2xl">
+        <div className="hidden w-full h-full lg:block md:w-1/2 rounded-2xl">
           <div className="relative w-full h-full md:bg-white">
-            <Image
-              className="block "
-              src="/register.jpg"
-              alt=""
-              fill
-              sizes="fill"
-            />
+            {darkmood !== "dark" ? (
+              <Image
+                className="block bg-black"
+                src="/dark-register.png "
+                alt=""
+                fill
+                sizes="fill"
+              />
+            ) : (
+              <Image
+                className="block "
+                src="/register.jpg"
+                alt=""
+                fill
+                sizes="fill"
+              />
+            )}
           </div>
         </div>
       </div>

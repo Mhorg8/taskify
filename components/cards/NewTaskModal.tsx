@@ -49,7 +49,10 @@ const NewTaskModal = () => {
             Add new Member
           </button>
 
-          <CustomButton text="Add" className="w-full py-4 mt-3 dark:bg-black dark:text-white"></CustomButton>
+          <CustomButton
+            text="Add"
+            className="w-full py-4 mt-3 dark:bg-black dark:text-white bg-black"
+          ></CustomButton>
         </form>
 
         {/* button for closing modal */}

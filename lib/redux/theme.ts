@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface InitialState {
   sidebarStatus: boolean;
-  darkmood: boolean;
+  darkmood: "dark" | "light";
   newTaskModal: boolean;
 }
 
 const initialState: InitialState = {
   sidebarStatus: false,
-  darkmood: false,
+  darkmood: "dark",
   newTaskModal: false,
 };
 
@@ -19,8 +19,8 @@ const themeSlice = createSlice({
       state.sidebarStatus = !state.sidebarStatus;
     },
 
-    toggleDarkmood(state) {
-      state.darkmood = !state.darkmood;
+    toggleDarkmood(state, action: PayloadAction<"dark" | "light">) {
+      state.darkmood = action.payload;
     },
     toggleOpenNewTaskModal(state) {
       state.newTaskModal = !state.newTaskModal;
@@ -28,5 +28,6 @@ const themeSlice = createSlice({
   },
 });
 
-export const { toggleSidebarStatus, toggleDarkmood , toggleOpenNewTaskModal } = themeSlice.actions;
+export const { toggleSidebarStatus, toggleDarkmood, toggleOpenNewTaskModal } =
+  themeSlice.actions;
 export default themeSlice.reducer;

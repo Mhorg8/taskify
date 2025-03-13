@@ -30,7 +30,7 @@ const MobileMenu = () => {
           initial="initial"
           animate="animate"
           transition={{ duration: 0.5, stiffness: 110 }}
-          className=" gap-3 absolute top-0 right-0 w-[80%] h-[100dvh] bg-gray"
+          className=" gap-3 absolute top-0 right-0 w-[70%] h-[100dvh] bg-gray z-50"
         >
           <div className="relative h-full w-full flex items-center justify-center">
             <button

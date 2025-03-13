@@ -1,28 +1,41 @@
+"use client";
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
+import { useAppSelector } from "@/lib/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa6";
 
 const LoginPage = () => {
+  const darkmood = useAppSelector((state) => state.theme.darkmood);
+
   return (
     <div className="w-full h-full lg:h-[calc(100dvh-80px)] py-5">
       <div className="container flex items-center gap-3 w-full h-full">
         {/* left section */}
-        <div className="absolute top-0 right-0 w-full h-full md:static md:w-1/2 rounded-2xl">
-          <div className="relative w-full h-full md:bg-white">
-            <Image
-              className="block "
-              src="/register.jpg"
-              alt=""
-              fill
-              sizes="fill"
-            />
+        <div className="hidden w-full h-full lg:block md:w-1/2 rounded-2xl">
+          <div className="relative w-full h-full md:bg-white ">
+            {darkmood ? (
+              <Image
+                className="block bg-black"
+                src="/dark-register.png "
+                alt=""
+                fill
+                sizes="fill"
+              />
+            ) : (
+              <Image
+                className="block "
+                src="/register.jpg"
+                alt=""
+                fill
+                sizes="fill"
+              />
+            )}
           </div>
         </div>
         {/* right section */}
-        <div className="w-full md:w-1/2 h-full z-20 py-4 flex flex-col justify-start items-center">
+        <div className="w-full lg:w-1/2 h-full z-20 py-4 flex flex-col justify-start items-center">
           <h2 className="text-4xl font-extrabold mt-10">
             Welcome <span className="text-red">Back</span>
           </h2>

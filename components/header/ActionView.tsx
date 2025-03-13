@@ -29,11 +29,11 @@ const ActionView = () => {
       <div className="flex items-center gap-2">
         <Switch
           onCheckedChange={() => {
-            dispatch(toggleDarkmood());
-            setTheme(darkmood ? "dark" : "light");
+            dispatch(toggleDarkmood(darkmood === "dark" ? "light" : "dark"));
+            setTheme(darkmood === "dark" ? "dark" : "light");
           }}
         />
-        <Label>{darkmood ? "Dark" : "Light"}</Label>
+        <Label>{darkmood === "dark" ? "Light" : "Dark"}</Label>
       </div>
       <button
         onClick={() => dispatch(toggleSidebarStatus())}
