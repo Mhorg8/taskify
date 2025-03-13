@@ -37,6 +37,7 @@ const NewTaskModal = () => {
             name="task"
             type="string"
             placeholder="something ..."
+            autoFocus
           />
           <CustomInput
             label="Description"

@@ -10,6 +10,7 @@ interface Props {
   inputClassName?: string;
   placeholder?: string;
   dissable?: boolean;
+  autoFocus?: boolean;
 }
 
 const CustomInput = ({
@@ -20,6 +21,7 @@ const CustomInput = ({
   inputClassName,
   placeholder,
   dissable,
+  autoFocus,
 }: Props) => {
   return (
     <div className="w-full space-y-1    ">
@@ -27,6 +29,7 @@ const CustomInput = ({
         {label}
       </Label>
       <Input
+        autoFocus={autoFocus}
         className={`${inputClassName} w-full shadow-sm text-base py-1 placeholder:text-sm`}
         type={type}
         name={name}
