@@ -1,10 +1,17 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import CustomButton from "@/components/CustomButton";
 import { FaGoogle, FaApple, FaFacebook } from "react-icons/fa6";
+import CustomInput from "@/components/CustomInput";
+
 const RegisterPage = () => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
     <div className="w-full h-full lg:h-[calc(100dvh-80px)] py-5">
       <div className="container flex items-center gap-3 w-full h-full">
@@ -18,35 +25,49 @@ const RegisterPage = () => {
             with Taskpro App. Get start for free.
           </p>
 
-          <form className="mt-10 w-[320px] md:w-[400px] lg:w-[500px] flex flex-col items-center justify-between h-full">
-            <div className="flex flex-col items-center justify-between gap-5">
-              <Input className="w-full" placeholder="Email" type="email" />
-              <Input className="w-full" placeholder="Username" type="text" />
-              <Input
-                className="w-full"
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 w-[320px] md:w-[400px] lg:w-[500px] flex flex-col items-center justify-between h-full"
+          >
+            <div className="flex flex-col items-center justify-between gap-5 w-full">
+              <CustomInput
+                name="email"
+                label="Email"
+                placeholder="example.com"
+                type="email"
+              />
+              <CustomInput
+                label="Username"
+                name="username"
+                placeholder="Username"
+                type="text"
+              />
+              <CustomInput
+                name="password"
+                label="Passowrd"
                 placeholder="password"
                 type="password"
-                autoComplete="false"
               />
               <CustomButton
-                text="  Create"
-                className="w-full font-bold text-lg rounded-full text-white py-3 cursor-pointer mt-5"
+                type="submit"
+                text="Create"
+                className="w-full font-bold text-lg rounded-full text-white py-3 cursor-pointer mt-5 dark:bg-white dark:text-black bg-black"
               />
 
-              <div className="relative w-full h-[2px] bg-black/40 my-7">
-                <p className="absolute -top-3 left-1/2 bg-[#fff] -translate-x-1/2 ">
+              <div className="relative w-full h-[2px] dark:bg-white bg-black/40 my-7">
+                <p className="absolute -top-3 left-1/2 dark:bg-black px-1 bg-[#fff] -translate-x-1/2 ">
                   or continue with
                 </p>
               </div>
 
               <div className="flex items-center justify-center gap-5">
-                <button className="bg-black text-white rounded-full p-4 hover:scale-110 hoverEffect cursor-pointer">
+                <button className="social-media-icon hoverEffect">
                   <FaGoogle size={22} />
                 </button>
-                <button className="bg-black text-white rounded-full p-4 hover:scale-110 hoverEffect cursor-pointer">
+                <button className="social-media-icon hoverEffect">
                   <FaApple size={22} />
                 </button>
-                <button className="bg-black text-white rounded-full p-4 hover:scale-110 hoverEffect cursor-pointer">
+                <button className="social-media-icon hoverEffect">
                   <FaFacebook size={22} />
                 </button>
               </div>

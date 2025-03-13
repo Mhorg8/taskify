@@ -22,6 +22,10 @@
   .cards__header-tab {
     @apply w-full py-3 text-center h-full hover:bg-zinc-300 cursor-pointer font-semibold;
   }
+
+  .social-media-icon {
+    @apply bg-black dark:bg-white dark:text-black text-white rounded-full p-4 hover:scale-110 cursor-pointer;
+  }
 }
 
 @theme {
