@@ -15,7 +15,7 @@ const LoginPage = () => {
         {/* left section */}
         <div className="hidden w-full h-full lg:block md:w-1/2 rounded-2xl">
           <div className="relative w-full h-full md:bg-white ">
-            {darkmood ? (
+            {darkmood !== "dark" ? (
               <Image
                 className="block bg-black"
                 src="/dark-register.png "
