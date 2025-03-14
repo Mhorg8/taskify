@@ -9,7 +9,7 @@ import { getTime } from "@/constant";
 import { Task } from "@/types";
 import { addNewTask } from "@/lib/redux/tasksSlice";
 import { uid } from "uid";
-const NewTaskModal = () => {
+const NewCardModal = () => {
   const dispatch = useAppDispatch();
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,19 +30,19 @@ const NewTaskModal = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-[100dvh] bg-black/30 shadow-sm dark:shadow-white  flex items-center justify-center">
       <div className="w-[400px] min-h-[400px] dark:text-black bg-white rounded-xl px-4 py-3 relative">
-        <h2 className="text-center text-xl font-bold">Create new Task</h2>
+        <h2 className="text-center text-xl font-bold">Create new Card</h2>
         <form onSubmit={handleSubmit} className="mt-3 space-y-3">
           <CustomInput
-            label="Task"
-            name="task"
-            type="string"
+            label="Name"
+            name="name"
+            type="text"
             placeholder="something ..."
             autoFocus
           />
           <CustomInput
             label="Description"
             name="description"
-            type="string"
+            type="text"
             placeholder="something ..."
           />
           <button className="text-base font-light hover:text-zinc-500 underline cursor-pointer">
@@ -67,4 +67,5 @@ const NewTaskModal = () => {
   );
 };
 
-export default NewTaskModal;
+
+export default NewCardModal;

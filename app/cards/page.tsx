@@ -6,11 +6,11 @@ import React, { useState } from "react";
 import StatusColumn from "@/components/cards/StatusColumn";
 import { columns } from "@/constant";
 import { useAppSelector } from "@/lib/redux/hooks";
-import NewTaskModal from "@/components/cards/NewTaskModal";
+import NewCardModal from "@/components/cards/NewCardModal";
 
 const CardsPage = () => {
-  const newTaskModalStatus = useAppSelector(
-    (state) => state.theme.newTaskModal
+  const newCardModalStatus = useAppSelector(
+    (state) => state.theme.newCardModal
   );
 
   return (
@@ -23,7 +23,7 @@ const CardsPage = () => {
         })}
       </div>
 
-      {newTaskModalStatus && <NewTaskModal />}
+      {newCardModalStatus && <NewCardModal />}
     </div>
   );
 };

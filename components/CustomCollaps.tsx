@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 import { Checkbox } from "./ui/checkbox";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { toogleOpenTaskView } from "@/lib/redux/theme";
+import { toggleAddNewTask, toogleOpenTaskView } from "@/lib/redux/theme";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface Task {
@@ -30,10 +30,11 @@ const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
   }
 
   return (
-    <div onClick={() => openDropdown(id)} className="px-7 mt-5 text-black">
+    <div className="px-7 mt-5 text-black">
       <div className="mb-2 flex items-center justify-between">
         <p className="text-lg font-medium">Total task ({tasks.length})</p>
         <button
+          onClick={() => dispatch(toggleAddNewTask())}
           type="button"
           className="px-3 py-1 hover:bg-stone-300 hoverEffect"
         >
