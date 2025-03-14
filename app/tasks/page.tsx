@@ -1,4 +1,5 @@
 import TaskView from "@/components/TaskView";
+import { tempTasks } from "@/constant";
 import React from "react";
 
 const TaskPage = () => {
@@ -19,10 +20,9 @@ const TaskPage = () => {
       <div className="px-10">
         <h3 className="mb-10 text-4xl font-bold ">Card's list</h3>
         <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          <TaskView />
-          <TaskView />
-          <TaskView />
-          <TaskView />
+          {tempTasks.map((task) => (
+            <TaskView key={task.id} task={task} />
+          ))}
         </div>
       </div>
     </div>

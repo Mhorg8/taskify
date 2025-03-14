@@ -1,4 +1,4 @@
-import { Column, Task } from "@/types";
+import { Column } from "@/types";
 
 export const HeaderLinks = [
   { id: 1, name: "Home", link: "/" },
@@ -27,3 +27,45 @@ export const columns: Column[] = [
   },
 ];
 
+export const tempTasks = [
+  {
+    id: 1,
+    title: "Go gym",
+    tasks: [
+      { id: 100, task: "Push up" },
+      { id: 101, task: "Push down" },
+      { id: 102, task: "Pull up" },
+      { id: 103, task: "Lat" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Go uni",
+    tasks: [
+      { id: 100, task: "Push up" },
+      { id: 101, task: "Push down" },
+      { id: 102, task: "Pull up" },
+      { id: 103, task: "Lat" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Go shopping center",
+    tasks: [
+      { id: 100, task: "Push up" },
+      { id: 101, task: "Push down" },
+      { id: 102, task: "Pull up" },
+      { id: 103, task: "Lat" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Go shopping center",
+    tasks: [
+      { id: 100, task: "Push up" },
+      { id: 101, task: "Push down" },
+      { id: 102, task: "Pull up" },
+      { id: 103, task: "Lat" },
+    ],
+  },
+];

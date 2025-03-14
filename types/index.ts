@@ -16,3 +16,4 @@ export interface Column {
 export interface TaskStatus {
   activeTab: "created" | "inprogress" | "finished";
 }
+
