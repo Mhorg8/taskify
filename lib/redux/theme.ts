@@ -5,6 +5,8 @@ interface InitialState {
   newCardModal: boolean;
   taskViewIsOpen: null | number;
   addNewTaskModal: boolean;
+  contextMenu: number | null;
+  uploadChatDocument: boolean;
 }
 
 const initialState: InitialState = {
@@ -13,6 +15,8 @@ const initialState: InitialState = {
   newCardModal: false,
   taskViewIsOpen: null,
   addNewTaskModal: false,
+  contextMenu: null,
+  uploadChatDocument: false,
 };
 
 const themeSlice = createSlice({
@@ -35,6 +39,12 @@ const themeSlice = createSlice({
     toggleAddNewTask(state, action: PayloadAction<boolean>) {
       state.addNewTaskModal = action.payload;
     },
+    toggleContextMenu(state, action: PayloadAction<number | null>) {
+      state.contextMenu = action.payload ? action.payload : null;
+    },
+    toggleUploadDocument(state) {
+      state.uploadChatDocument = !state.uploadChatDocument;
+    },
   },
 });
 
@@ -44,5 +54,7 @@ export const {
   toggleOpenNewTaskModal,
   toogleOpenTaskView,
   toggleAddNewTask,
+  toggleContextMenu,
+  toggleUploadDocument,
 } = themeSlice.actions;
 export default themeSlice.reducer;
