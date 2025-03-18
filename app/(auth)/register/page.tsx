@@ -9,7 +9,7 @@ import CustomInput from "@/components/CustomInput";
 import { useAppSelector } from "@/lib/redux/hooks";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-
+import { toast } from "sonner";
 const RegisterPage = () => {
   const darkmood = useAppSelector((state) => state.theme.darkmood);
   const router = useRouter();
@@ -25,10 +25,13 @@ const RegisterPage = () => {
       },
     });
 
-    console.log(response);
-
     if (response.data.isSuccess) {
-      router.push("/login");
+      toast.success(response.data.message);
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+    } else {
+      toast.error(response.data.message);
     }
   }
 

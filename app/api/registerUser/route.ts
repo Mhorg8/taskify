@@ -4,9 +4,6 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
   try {
-    if (!req) {
-      throw new Error("Request is not define");
-    }
     const body = await req.json();
     const { email, username, password } = body;
 
@@ -17,7 +14,7 @@ export async function POST(req: NextRequest) {
           isSuccess: false,
           message: "Credential not provided. Please try again",
         },
-        { status: 400 }
+        { status: 200 }
       );
     }
 
@@ -26,9 +23,9 @@ export async function POST(req: NextRequest) {
         {
           data: null,
           isSuccess: false,
-          message: `Password should be greater than 6 char, ${email}`,
+          message: `Password should be greater than 6 char, ${password}`,
         },
-        { status: 400 }
+        { status: 200 }
       );
     }
 
@@ -45,7 +42,7 @@ export async function POST(req: NextRequest) {
           isSuccess: false,
           message: `User already exist , ${email}`,
         },
-        { status: 409 }
+        { status: 200 }
       );
     }
 
