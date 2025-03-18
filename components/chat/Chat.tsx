@@ -63,7 +63,7 @@ const Chat = () => {
           <input
             type="text"
             placeholder="Message"
-            className="bg-zinc-300 w-full py-3 px-4 rounded-b-xl"
+            className="bg-zinc-300 dark:bg-zinc-600/90 w-full py-3 px-4 rounded-b-xl"
           />
           <div className="absolute top-1/2 -translate-y-1/2 right-1 space-x-2">
             <button className="hover:bg-red/60 hover:text-white p-2.5 text-black rounded-full hover:scale-110 hoverEffect">
