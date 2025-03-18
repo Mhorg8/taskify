@@ -7,11 +7,29 @@ import CustomButton from "@/components/CustomButton";
 import { FaGoogle, FaApple, FaFacebook } from "react-icons/fa6";
 import CustomInput from "@/components/CustomInput";
 import { useAppSelector } from "@/lib/redux/hooks";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const darkmood = useAppSelector((state) => state.theme.darkmood);
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  const router = useRouter();
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const registerationData = Object.fromEntries(formData.entries());
+
+    const response = await axios.post("/api/registerUser", registerationData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(response);
+
+    if (response.data.isSuccess) {
+      router.push("/login");
+    }
   }
 
   return (
