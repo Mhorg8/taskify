@@ -17,3 +17,12 @@ export interface TaskStatus {
   activeTab: "created" | "inprogress" | "finished";
 }
 
+export interface User {
+  id: string;
+  Username: string;
+  Password: string;
+  Email: string;
+  ProfileImage?: string | null;
+  CreatedAt: Date;
+  UpdatedAt: Date;
+}

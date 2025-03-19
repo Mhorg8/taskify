@@ -1,13 +1,38 @@
 "use client";
+import { signIn } from "next-auth/react";
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
 import { useAppSelector } from "@/lib/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { FormEvent } from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa6";
+import { redirect } from "next/navigation";
 
 const LoginPage = () => {
   const darkmood = useAppSelector((state) => state.theme.darkmood);
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const userInformation = Object.fromEntries(formData.entries());
+
+    console.log(userInformation);
+
+    const response = await signIn("credentials", {
+      email: userInformation.email,
+      password: userInformation.password,
+      redirect: false,
+    });
+
+    console.log(response);
+    if (response) {
+      redirect("/");
+    } else {
+      redirect("/login");
+    }
+  }
 
   return (
     <div className="w-full h-full lg:h-[calc(100dvh-80px)] py-5">
@@ -44,7 +69,10 @@ const LoginPage = () => {
             tasks, manage your projects, and stay organized with ease.
           </p>
 
-          <form className="mt-10 w-[320px] md:w-[400px] lg:w-[500px] flex flex-col items-center justify-between h-full ">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 w-[320px] md:w-[400px] lg:w-[500px] flex flex-col items-center justify-between h-full "
+          >
             <div className="w-full flex flex-col items-center justify-between gap-4">
               <CustomInput
                 name="email"

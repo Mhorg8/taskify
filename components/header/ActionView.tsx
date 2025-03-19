@@ -8,17 +8,29 @@ import { toggleDarkmood, toggleSidebarStatus } from "@/lib/redux/theme";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useTheme } from "next-themes";
+import { signOut, useSession } from "next-auth/react";
 
 const ActionView = () => {
   const darkmood = useAppSelector((state) => state.theme.darkmood);
   const dispatch = useAppDispatch();
   const { setTheme } = useTheme();
+  const { data: session } = useSession();
+
+  function handleLogout() {
+    signOut();
+  }
 
   return (
     <div className="flex items-center gap-3">
-      <Link href="/register">
-        <LuCircleUserRound size={24} />
-      </Link>
+      {session ? (
+        <button onClick={handleLogout}>
+          
+          {session.user?.username}</button>
+      ) : (
+        <Link href="/register">
+          <LuCircleUserRound size={24} />
+        </Link>
+      )}
 
       <div className="relative">
         <Link href="/">

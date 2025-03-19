@@ -5,6 +5,7 @@ import Header from "../components/header/Header";
 import StoreProvider from "./StoreProvider";
 import { ThemeProvider } from "./ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,20 +30,22 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <StoreProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
+        <SessionProvider>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-            <Header />
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </body>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Header />
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </body>
+        </SessionProvider>
       </StoreProvider>
     </html>
   );
