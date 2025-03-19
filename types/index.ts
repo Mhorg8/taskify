@@ -1,3 +1,5 @@
+import { IconType } from "react-icons/lib";
+
 export interface Task {
   id: string;
   title: string;
@@ -17,6 +19,18 @@ export interface TaskStatus {
   activeTab: "created" | "inprogress" | "finished";
 }
 
+export interface SocialIcon {
+  id: number;
+  href: string;
+  name: string;
+  Icon: IconType;
+}
+
+export interface FooterLink {
+  id: number;
+  title: string;
+  sublinks: { title: string; href: string }[];
+}
 export interface User {
   id: string;
   Username: string;

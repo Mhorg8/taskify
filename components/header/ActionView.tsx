@@ -23,9 +23,7 @@ const ActionView = () => {
   return (
     <div className="flex items-center gap-3">
       {session ? (
-        <button onClick={handleLogout}>
-          
-          {session.user?.username}</button>
+        <button onClick={handleLogout}>{session.user?.username}</button>
       ) : (
         <Link href="/register">
           <LuCircleUserRound size={24} />
