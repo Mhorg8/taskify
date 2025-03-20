@@ -1,4 +1,4 @@
-import { Column, FooterLink, Notification, SocialIcon } from "@/types";
+import { Column, Feature, FooterLink, Notification, SocialIcon } from "@/types";
 import {
   FaInstagram,
   FaPinterest,
@@ -12,6 +12,29 @@ export const HeaderLinks = [
   { id: 4, name: "Cards", link: "/cards" },
   { id: 2, name: "Tasks", link: "/tasks" },
   { id: 3, name: "Chat", link: "/chat" },
+];
+
+export const features: Feature[] = [
+  {
+    id: 1,
+    title: "Manage your time.",
+    text: "You can add new tasks and set time to manage your time efficiently.",
+  },
+  {
+    id: 2,
+    title: "Track your progress.",
+    text: "Monitor your task completion and see how much progress you are making.",
+  },
+  {
+    id: 3,
+    title: "Organize by priority.",
+    text: "Set priorities for your tasks so you know what to focus on first.",
+  },
+  {
+    id: 4,
+    title: "Collaborate with others.",
+    text: "Share tasks with teammates and collaborate on projects.",
+  },
 ];
 
 export const getTime = () => {

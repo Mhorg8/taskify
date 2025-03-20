@@ -19,6 +19,12 @@ export interface TaskStatus {
   activeTab: "created" | "inprogress" | "finished";
 }
 
+export interface Feature {
+  id: number;
+  title: string;
+  text: string;
+}
+
 export interface SocialIcon {
   id: number;
   href: string;

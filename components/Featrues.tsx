@@ -2,34 +2,7 @@
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { motion } from "framer-motion";
-interface Feature {
-  id: number;
-  title: string;
-  text: string;
-}
-
-const features: Feature[] = [
-  {
-    id: 1,
-    title: "Manage your time.",
-    text: "You can add new tasks and set time to manage your time efficiently.",
-  },
-  {
-    id: 2,
-    title: "Track your progress.",
-    text: "Monitor your task completion and see how much progress you are making.",
-  },
-  {
-    id: 3,
-    title: "Organize by priority.",
-    text: "Set priorities for your tasks so you know what to focus on first.",
-  },
-  {
-    id: 4,
-    title: "Collaborate with others.",
-    text: "Share tasks with teammates and collaborate on projects.",
-  },
-];
+import { features } from "@/constant";
 
 const animation = {
   initial: {
@@ -70,7 +43,9 @@ const Features = () => {
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black">
             {features[currentIndex].title}
           </h2>
-          <p className="text-lg">{features[currentIndex].text}</p>
+          <p className="text-lg max-w-[250px] md:w-full">
+            {features[currentIndex].text}
+          </p>
         </motion.div>
 
         {/* Arrow buttons */}
