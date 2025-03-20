@@ -5,24 +5,36 @@ import CustomButton from "../CustomButton";
 import { IoClose } from "react-icons/io5";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
-import { getTime } from "@/constant";
 import { Task } from "@/types";
 import { addNewTask } from "@/lib/redux/tasksSlice";
-import { uid } from "uid";
+import axios from "axios";
+import { toast } from "sonner";
+
 const NewCardModal = () => {
   const dispatch = useAppDispatch();
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formDate = new FormData(e.currentTarget);
     const data = Object.fromEntries(formDate.entries());
-
-    const newTask: Task = {
-      id: uid(12),
-      title: data.task as string,
-      desc: data.description as string,
-      time: getTime(),
-      status: "created",
+    const confiq = {
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
+    const response = await axios.post("/api/addNewCard", data, confiq);
+    if (!response.data.isSucess === false) {
+      toast.error(response.data.message);
+    }
+
+    toast.success(response.data.message);
+    let newTask: Task = response.data.task;
+
+    newTask.createdAt = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
 
     dispatch(addNewTask(newTask));
     dispatch(toggleOpenNewTaskModal());
@@ -50,6 +62,7 @@ const NewCardModal = () => {
           </button>
 
           <CustomButton
+            type="submit"
             text="Add"
             className="w-full py-4 mt-3 dark:bg-black dark:text-white bg-black"
           ></CustomButton>
@@ -66,6 +79,5 @@ const NewCardModal = () => {
     </div>
   );
 };
-
 
 export default NewCardModal;

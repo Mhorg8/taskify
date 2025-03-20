@@ -18,15 +18,12 @@ const LoginPage = () => {
     const formData = new FormData(e.currentTarget);
     const userInformation = Object.fromEntries(formData.entries());
 
-    console.log(userInformation);
-
     const response = await signIn("credentials", {
       email: userInformation.email,
       password: userInformation.password,
       redirect: false,
     });
 
-    console.log(response);
     if (response) {
       redirect("/");
     } else {

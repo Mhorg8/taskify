@@ -44,7 +44,7 @@ const StatusColumn = ({ column, createTaskClassName }: Props) => {
         .filter((item) => item.status.toLowerCase() === column.status)
         .map((task) => (
           <div className="w-full " key={task.id}>
-            <TodoView task={task} />
+            <TodoView item={task} />
             <DropArea />
           </div>
         ))}

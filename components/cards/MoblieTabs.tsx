@@ -13,6 +13,7 @@ const MoblieTabs = () => {
   const activeTab = useAppSelector((state) => state.tasks.activeTab);
   const tasks = useAppSelector((state) => state.tasks.tasks);
 
+
   function getArrayLength() {
     const array = columns.filter((item) => item.status === activeTab);
 
@@ -50,7 +51,7 @@ const MoblieTabs = () => {
         {tasks
           .filter((item) => item.status === activeTab)
           .map((task) => {
-            return <TodoView task={task} key={task.id} />;
+            return <TodoView item={task} key={task.id} />;
           })}
       </div>
     </div>

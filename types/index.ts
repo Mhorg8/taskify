@@ -2,10 +2,11 @@ import { IconType } from "react-icons/lib";
 
 export interface Task {
   id: string;
-  title: string;
-  desc: string;
+  task: string;
+  description: string;
   status: string;
-  time: string;
+  createdAt: string;
+  updatedAt: Date;
 }
 
 export interface Column {

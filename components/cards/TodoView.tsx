@@ -17,15 +17,15 @@ import {
 } from "@/lib/redux/tasksSlice";
 
 interface Props {
-  task: Task;
+  item: Task;
 }
 
-const TodoView = ({ task }: Props) => {
-  const { title, desc, time } = task;
+const TodoView = ({ item }: Props) => {
+  const { task, description, createdAt } = item;
   const [showCardMembers, setShowCardMembers] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const handleDragStart = () => {
-    dispatch(setActiveTask(task));
+    dispatch(setActiveTask(item));
     setShowCardMembers(false);
   };
 
@@ -34,9 +34,9 @@ const TodoView = ({ task }: Props) => {
       draggable
       onDragStart={handleDragStart}
       className={`border-r-2 ${
-        task.status === "created"
+        item.status === "created"
           ? "border-r-red"
-          : task.status === "inprogress"
+          : item.status === "inprogress"
           ? "border-r-blue-400"
           : "border-r-green-500"
       }  w-full h-[200px] mt-3 border border-zinc-200 flex flex-col items-start justify-between
@@ -44,27 +44,27 @@ const TodoView = ({ task }: Props) => {
     >
       <div className="flex items-center justify-between w-full">
         <h3 className="line-clamp-1 text-lg md:text-lg lg:text-2xl font-bold flex-1">
-          {title}
+          {task}
         </h3>
         <>
-          {task.status === "created" ? (
+          {item.status === "created" ? (
             <button
               className="cursor-pointer"
-              onClick={() => dispatch(changeToInprogress(task.id))}
+              onClick={() => dispatch(changeToInprogress(item.id))}
             >
               <LuCheck size={24} />
             </button>
-          ) : task.status === "inprogress" ? (
+          ) : item.status === "inprogress" ? (
             <button
               className="cursor-pointer"
-              onClick={() => dispatch(changeToFinished(task.id))}
+              onClick={() => dispatch(changeToFinished(item.id))}
             >
               <LuCheckCheck size={24} />
             </button>
           ) : (
             <button
               className="cursor-pointer"
-              onClick={() => dispatch(handleDeleteTask(task.id))}
+              onClick={() => dispatch(handleDeleteTask(item.id))}
             >
               <LuTrash size={24} />
             </button>
@@ -72,7 +72,7 @@ const TodoView = ({ task }: Props) => {
         </>
       </div>
       <p className="mb-3 lg:mb-0 text-start line-clamp-2 text-sm md:text-base mt-1 dark:text-zinc-300 text-gray-700">
-        {desc}
+        {description}
       </p>
       <div className="flex items-center justify-between w-full">
         <div className="flex-1 flex items-center justify-start relative">
@@ -91,7 +91,9 @@ const TodoView = ({ task }: Props) => {
             )}
           </button>
         </div>
-        <p className="text-sm text-gray-600 dark:text-zinc-300">{time}</p>
+        <p className="text-sm text-gray-600 dark:text-zinc-300">
+          {createdAt.toString()}
+        </p>
       </div>
 
       {/* card member list */}

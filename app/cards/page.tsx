@@ -1,7 +1,7 @@
 "use client";
 import MoblieTabs from "@/components/cards/MoblieTabs";
 import TodoView from "@/components/cards/TodoView";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import StatusColumn from "@/components/cards/StatusColumn";
 import { columns } from "@/constant";
