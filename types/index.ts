@@ -40,3 +40,11 @@ export interface User {
   CreatedAt: Date;
   UpdatedAt: Date;
 }
+
+export interface Notification {
+  id: number;
+  senderName: string;
+  message: string;
+  time: string;
+  thumnail: string | null;
+}

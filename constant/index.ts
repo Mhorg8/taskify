@@ -1,4 +1,4 @@
-import { Column, FooterLink, SocialIcon } from "@/types";
+import { Column, FooterLink, Notification, SocialIcon } from "@/types";
 import {
   FaInstagram,
   FaPinterest,
@@ -139,5 +139,29 @@ export const footerLInk: FooterLink[] = [
       { title: "Chat", href: "/chat" },
       { title: "Register", href: "/register" },
     ],
+  },
+];
+
+export const notifications: Notification[] = [
+  {
+    id: 1,
+    thumnail: null,
+    senderName: "mohamamd",
+    message: "new message",
+    time: new Date().toLocaleTimeString(),
+  },
+  {
+    id: 2,
+    thumnail: null,
+    senderName: "alireza",
+    message: "add new task",
+    time: new Date().toLocaleTimeString(),
+  },
+  {
+    id: 3,
+    thumnail: null,
+    senderName: "mahdi",
+    message: "join into card",
+    time: new Date().toLocaleTimeString(),
   },
 ];

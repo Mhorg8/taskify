@@ -7,6 +7,7 @@ interface InitialState {
   addNewTaskModal: boolean;
   contextMenu: number | null;
   uploadChatDocument: boolean;
+  notificationModalStatus: boolean;
 }
 
 const initialState: InitialState = {
@@ -17,6 +18,7 @@ const initialState: InitialState = {
   addNewTaskModal: false,
   contextMenu: null,
   uploadChatDocument: false,
+  notificationModalStatus: false,
 };
 
 const themeSlice = createSlice({
@@ -24,11 +26,13 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     toggleSidebarStatus(state) {
+      state.notificationModalStatus = false;
       state.sidebarStatus = !state.sidebarStatus;
     },
 
     toggleDarkmood(state, action: PayloadAction<"dark" | "light">) {
       state.darkmood = action.payload;
+      state.notificationModalStatus = false;
     },
     toggleOpenNewTaskModal(state) {
       state.newCardModal = !state.newCardModal;
@@ -45,6 +49,9 @@ const themeSlice = createSlice({
     toggleUploadDocument(state) {
       state.uploadChatDocument = !state.uploadChatDocument;
     },
+    toggleNotificationModal(state) {
+      state.notificationModalStatus = !state.notificationModalStatus;
+    },
   },
 });
 
@@ -56,5 +63,6 @@ export const {
   toggleAddNewTask,
   toggleContextMenu,
   toggleUploadDocument,
+  toggleNotificationModal,
 } = themeSlice.actions;
 export default themeSlice.reducer;
