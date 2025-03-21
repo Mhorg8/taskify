@@ -40,7 +40,6 @@ const tasksSlice = createSlice({
       );
     },
     handleDeleteTask: (state, action: PayloadAction<string>) => {
-      console.log("deleted");
       state.tasks = state.tasks.map((task) =>
         task.id === action.payload ? { ...task, status: "deleted" } : task
       );

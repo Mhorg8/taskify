@@ -5,7 +5,7 @@ import { useAppSelector, useAppDispatch } from "@/lib/redux/hooks";
 import { changeTaskStatus } from "@/lib/redux/tasksSlice";
 import TodoView from "./TodoView";
 import DropArea from "./DropArea";
-import { Column } from "@/types";
+import { Column, Task } from "@/types";
 import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
 
 interface Props {

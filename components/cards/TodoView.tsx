@@ -15,6 +15,8 @@ import {
   handleDeleteTask,
   setActiveTask,
 } from "@/lib/redux/tasksSlice";
+import axios from "axios";
+import { toast } from "sonner";
 
 interface Props {
   item: Task;
@@ -24,10 +26,26 @@ const TodoView = ({ item }: Props) => {
   const { task, description, createdAt } = item;
   const [showCardMembers, setShowCardMembers] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  // drag function to set the active task
   const handleDragStart = () => {
     dispatch(setActiveTask(item));
     setShowCardMembers(false);
   };
+
+  async function DeleteTask(id: string) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await axios.post("/api/deleteCard", { id }, config);
+
+    if (!response.data.isSucess) {
+      toast.error(response.data.message);
+    }
+    dispatch(handleDeleteTask(id));
+    toast.success(response.data.message);
+  }
 
   return (
     <div
@@ -46,7 +64,10 @@ const TodoView = ({ item }: Props) => {
         <h3 className="line-clamp-1 text-lg md:text-lg lg:text-2xl font-bold flex-1">
           {task}
         </h3>
-        <>
+        <div className="flex items-center gap-2">
+          <button>
+            <LuTrash onClick={() => DeleteTask(item.id)} size={22} />
+          </button>
           {item.status === "created" ? (
             <button
               className="cursor-pointer"
@@ -69,7 +90,7 @@ const TodoView = ({ item }: Props) => {
               <LuTrash size={24} />
             </button>
           )}
-        </>
+        </div>
       </div>
       <p className="mb-3 lg:mb-0 text-start line-clamp-2 text-sm md:text-base mt-1 dark:text-zinc-300 text-gray-700">
         {description}
