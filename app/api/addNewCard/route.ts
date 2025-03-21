@@ -50,3 +50,27 @@ export async function POST(req: NextRequest) {
     { status: 200 }
   );
 }
+
+export async function GET() {
+  const allTask = await client.card.findMany();
+
+  if (allTask.length === 0) {
+    return NextResponse.json(
+      {
+        message: "No task found",
+        isSucess: false,
+        data: null,
+      },
+      { status: 200 }
+    );
+  }
+
+  return NextResponse.json(
+    {
+      message: "All task fetched successfully",
+      isSucess: true,
+      tasks: allTask,
+    },
+    { status: 200 }
+  );
+}

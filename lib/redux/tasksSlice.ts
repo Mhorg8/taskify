@@ -50,6 +50,10 @@ const tasksSlice = createSlice({
       state.tasks.unshift(action.payload);
     },
 
+    setTasks: (state, action: PayloadAction<Task[]>) => {
+      state.tasks = action.payload;
+    },
+
     toggleActiveTabChange: (state, action: PayloadAction<string>) => {
       state.activeTab = action.payload;
     },
@@ -64,5 +68,6 @@ export const {
   handleDeleteTask,
   addNewTask,
   toggleActiveTabChange,
+  setTasks,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

@@ -11,10 +11,10 @@ import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
 interface Props {
   column: Column;
   createTaskClassName?: string;
+  tasks: Task[];
 }
 
-const StatusColumn = ({ column, createTaskClassName }: Props) => {
-  const tasks = useAppSelector((state) => state.tasks.tasks);
+const StatusColumn = ({ column, createTaskClassName, tasks }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -41,13 +41,15 @@ const StatusColumn = ({ column, createTaskClassName }: Props) => {
         </div>
       ) : null}
       {tasks
-        .filter((item) => item.status.toLowerCase() === column.status)
-        .map((task) => (
-          <div className="w-full " key={task.id}>
-            <TodoView item={task} />
-            <DropArea />
-          </div>
-        ))}
+        ? tasks
+            .filter((item) => item.status.toLowerCase() === column.status)
+            .map((task) => (
+              <div className="w-full " key={task.id}>
+                <TodoView item={task} />
+                <DropArea />
+              </div>
+            ))
+        : null}
     </div>
   );
 };
