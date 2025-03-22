@@ -1,8 +1,6 @@
 "use client";
 import MoblieTabs from "@/components/cards/MoblieTabs";
-import TodoView from "@/components/cards/TodoView";
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import StatusColumn from "@/components/cards/StatusColumn";
 import { columns } from "@/constant";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
@@ -10,10 +8,14 @@ import NewCardModal from "@/components/cards/NewCardModal";
 import { toast } from "sonner";
 import { addNewTask, setTasks } from "@/lib/redux/tasksSlice";
 import axios from "axios";
+import AddNewMemberModal from "@/components/cards/AddNewMemberModal";
 
 const CardsPage = () => {
   const dispath = useAppDispatch();
   const tasks = useAppSelector((state) => state.tasks.tasks);
+  const addingNewMeberModalStatus = useAppSelector(
+    (state) => state.theme.addNewMemberModal
+  );
   const fetchTasks = async () => {
     const response = await axios.get("/api/addNewCard");
 
@@ -32,7 +34,7 @@ const CardsPage = () => {
   );
 
   return (
-    <div className="h-[calc(100dvh-80px)] overflow-hidden relative">
+    <div className="h-[calc(100dvh-80px)] overflow-hidden relative ">
       <MoblieTabs />
       {/* large screen container */}
       <div className="hidden lg:grid grid-cols-3 h-full">
@@ -42,6 +44,7 @@ const CardsPage = () => {
       </div>
 
       {newCardModalStatus && <NewCardModal />}
+      {addingNewMeberModalStatus && <AddNewMemberModal />}
     </div>
   );
 };

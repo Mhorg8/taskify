@@ -8,6 +8,7 @@ interface InitialState {
   contextMenu: number | null;
   uploadChatDocument: boolean;
   notificationModalStatus: boolean;
+  addNewMemberModal: boolean;
 }
 
 const initialState: InitialState = {
@@ -19,6 +20,7 @@ const initialState: InitialState = {
   contextMenu: null,
   uploadChatDocument: false,
   notificationModalStatus: false,
+  addNewMemberModal: false,
 };
 
 const themeSlice = createSlice({
@@ -52,6 +54,9 @@ const themeSlice = createSlice({
     toggleNotificationModal(state) {
       state.notificationModalStatus = !state.notificationModalStatus;
     },
+    toggleAddNewMemberModal(state) {
+      state.addNewMemberModal = !state.addNewMemberModal;
+    },
   },
 });
 
@@ -64,5 +69,6 @@ export const {
   toggleContextMenu,
   toggleUploadDocument,
   toggleNotificationModal,
+  toggleAddNewMemberModal,
 } = themeSlice.actions;
 export default themeSlice.reducer;

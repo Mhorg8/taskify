@@ -17,6 +17,8 @@ import {
 } from "@/lib/redux/tasksSlice";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { toggleAddNewMemberModal } from "@/lib/redux/theme";
 
 interface Props {
   item: Task;
@@ -24,12 +26,19 @@ interface Props {
 
 const TodoView = ({ item }: Props) => {
   const { task, description, createdAt } = item;
-  const [showCardMembers, setShowCardMembers] = useState<boolean>(false);
+  const [showCardMembers, setShowCardMembers] = useState<string | null>(null);
   const dispatch = useAppDispatch();
-  // drag function to set the active task
+  const router = useRouter();
+
+  // Handle opening/closing the dropdown for the current card
+  const handleOpenCardMembers = (id: string) => {
+    setShowCardMembers((prevId) => (prevId === id ? null : id));
+  };
+
+  // Drag function to set the active task
   const handleDragStart = () => {
     dispatch(setActiveTask(item));
-    setShowCardMembers(false);
+    setShowCardMembers(null);
   };
 
   async function DeleteTask(id: string) {
@@ -45,6 +54,12 @@ const TodoView = ({ item }: Props) => {
     }
     dispatch(handleDeleteTask(id));
     toast.success(response.data.message);
+  }
+
+  function openAddingMemberModal(cardId: string) {
+    router.push("/cards?Id=" + cardId);
+    setShowCardMembers(null);
+    dispatch(toggleAddNewMemberModal());
   }
 
   return (
@@ -103,9 +118,9 @@ const TodoView = ({ item }: Props) => {
           <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full cursor-pointer bg-yellow -ml-4 hover:scale-110 hoverEffect"></div>
           <button
             className="mx-3 cursor-pointer"
-            onClick={() => setShowCardMembers(!showCardMembers)}
+            onClick={() => handleOpenCardMembers(item.id)}
           >
-            {showCardMembers ? (
+            {showCardMembers === item.id ? (
               <LuChevronUp size={20} />
             ) : (
               <LuChevronDown size={20} />
@@ -117,8 +132,8 @@ const TodoView = ({ item }: Props) => {
         </p>
       </div>
 
-      {/* card member list */}
-      {showCardMembers && (
+      {/* Card member list */}
+      {showCardMembers === item.id && (
         <div className="absolute top-full left-5 bg-black/70 max-w-[330px] text-white h-fit min-w-60  flex flex-col items-center justify-between rounded-sm -mt-2 dark:bg-white dark:text-black z-10">
           <div className="flex items-start gap-2 justify-between w-full hover:bg-black/10 p-2">
             <div className="h-12 w-12 rounded-full bg-red"></div>
@@ -128,10 +143,10 @@ const TodoView = ({ item }: Props) => {
             </div>
           </div>
 
-          {/* adding new member button */}
+          {/* Adding new member button */}
           <button
             className="w-full mt-2 cursor-pointer py-2 dark:bg-zinc-300 bg-black/50 rounded-b-sm font-semibold"
-            onClick={(e) => e.preventDefault()}
+            onClick={() => openAddingMemberModal(item.id)}
           >
             Add new member
           </button>
