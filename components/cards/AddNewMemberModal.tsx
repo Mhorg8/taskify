@@ -14,20 +14,18 @@ const AddNewMemberModal = () => {
     const formData = new FormData(e.currentTarget);
     const config = {
       headers: {
-        "Content-types": "form-data",
+        "Content-Type": "multipart/form-data",
       },
     };
 
     if (cardId) {
       formData.append("cardId", cardId);
-
-      const response = await axios.post(
-        "/api/addingNewMemberToCard",
-        formData,
-        config
-      );
-      console.log(response.data);
     }
+    const response = await axios.post(
+      "/api/addingMemberToCard",
+      formData,
+      config
+    );
   };
   return (
     <div className="absolute top-0 left-0 w-full h-[100dvh] bg-black/30 shadow-sm dark:shadow-white  flex items-center justify-center">

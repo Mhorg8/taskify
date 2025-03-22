@@ -52,7 +52,11 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  const allTask = await client.card.findMany();
+  const allTask = await client.card.findMany({
+    include: {
+      users: true,
+    },
+  });
 
   if (allTask.length === 0) {
     return NextResponse.json(

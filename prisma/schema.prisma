@@ -21,6 +21,7 @@ model User  {
   ProfileImage String?
   CreatedAt DateTime @default(now())
   UpdatedAt DateTime @updatedAt
+  cards Card[]  @relation("UserCards")
 }
 
 model Card {
@@ -30,4 +31,5 @@ model Card {
   status String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  users User[] @relation("UserCards")
 }

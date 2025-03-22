@@ -7,6 +7,7 @@ export interface Task {
   status: string;
   createdAt: Date;
   updatedAt: Date;
+  users: User[];
 }
 
 export interface Column {
@@ -46,6 +47,7 @@ export interface User {
   ProfileImage?: string | null;
   CreatedAt: Date;
   UpdatedAt: Date;
+  cards: Task[];
 }
 
 export interface Notification {

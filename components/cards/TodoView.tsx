@@ -19,6 +19,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { toggleAddNewMemberModal } from "@/lib/redux/theme";
+import Image from "next/image";
 
 interface Props {
   item: Task;
@@ -113,9 +114,23 @@ const TodoView = ({ item }: Props) => {
       <div className="flex items-center justify-between w-full">
         <div className="flex-1 flex items-center justify-start relative">
           {/* Add colors or avatars for task owners */}
-          <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full cursor-pointer bg-red hover:scale-110 hoverEffect"></div>
-          <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full cursor-pointer bg-blue-500 -ml-4 hover:scale-110 hoverEffect"></div>
-          <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full cursor-pointer bg-yellow -ml-4 hover:scale-110 hoverEffect"></div>
+          {item.users.map((user) => {
+            return (
+              <div
+                key={user.id}
+                className="w-8 h-8 lg:w-12 lg:h-12 rounded-full relative cursor-pointer bg-red hover:scale-110 hoverEffect"
+              >
+                <Image
+                  src={user.ProfileImage ? user.ProfileImage : "/profile.jpg"}
+                  alt=""
+                  className="rounded-full"
+                  fill
+                  sizes="fill"
+                />
+              </div>
+            );
+          })}
+
           <button
             className="mx-3 cursor-pointer"
             onClick={() => handleOpenCardMembers(item.id)}
