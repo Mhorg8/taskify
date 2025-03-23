@@ -3,6 +3,7 @@ import React, { FormEvent } from "react";
 import CustomInput from "../CustomInput";
 import CustomButton from "../CustomButton";
 import axios from "axios";
+import { toast } from "sonner";
 
 const AddNewMemberModal = () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -26,6 +27,13 @@ const AddNewMemberModal = () => {
       formData,
       config
     );
+
+    if (!response.data.isSucess) {
+      toast.error(response.data.message);
+    } else {
+      toast.success(response.data.message);
+    }
+    
   };
   return (
     <div className="absolute top-0 left-0 w-full h-[100dvh] bg-black/30 shadow-sm dark:shadow-white  flex items-center justify-center">

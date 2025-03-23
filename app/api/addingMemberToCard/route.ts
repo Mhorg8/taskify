@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         id: cardId,
       },
       include: {
-        users: true, // Include associated users
+        users: true,
       },
     });
 
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     // If the user doesn't exist, create a new user
     if (!currentUser) {
       return NextResponse.json(
-        { message: "User not founded" },
+        { message: "User not founded", isSucess: false, data: null },
         { status: 200 }
       );
     }
