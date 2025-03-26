@@ -4,6 +4,10 @@ import CustomInput from "../CustomInput";
 import CustomButton from "../CustomButton";
 import axios from "axios";
 import { toast } from "sonner";
+import { LuX } from "react-icons/lu";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { toggleAddNewMemberModal } from "@/lib/redux/theme";
+import { IoClose } from "react-icons/io5";
 
 const AddNewMemberModal = () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -33,8 +37,10 @@ const AddNewMemberModal = () => {
     } else {
       toast.success(response.data.message);
     }
-    
+    dispatch(toggleAddNewMemberModal());
   };
+
+  const dispatch = useAppDispatch();
   return (
     <div className="absolute top-0 left-0 w-full h-[100dvh] bg-black/30 shadow-sm dark:shadow-white  flex items-center justify-center">
       <div className="w-[400px] min-h-[380px] dark:text-black bg-white rounded-xl px-4 py-3 relative">
@@ -60,6 +66,13 @@ const AddNewMemberModal = () => {
             className="w-full py-4 mt-3 dark:bg-black dark:text-white bg-black font-extrabold"
           ></CustomButton>
         </form>
+
+        <button
+          className="cursor-pointer absolute top-2 right-4  bg-white hover:bg-zinc-300 rounded-full flex items-center justify-center p-2 hoverEffect"
+          onClick={() => dispatch(toggleAddNewMemberModal())}
+        >
+          <IoClose size={24} />
+        </button>
       </div>
     </div>
   );

@@ -76,23 +76,24 @@ const TodoView = ({ item }: Props) => {
       <div className="flex items-center justify-between w-full">
         <div className="flex-1 flex items-center justify-start relative ml-3">
           {/* Add colors or avatars for task owners */}
-          {item.users.slice(0, 2)?.map((user) => {
-            return (
-              <div
-                key={user.id}
-                className="w-8 h-8 lg:w-12 lg:h-12 rounded-full -ml-3 hover:z-20 relative cursor-pointer hover:scale-110 hoverEffect"
-              >
-                <Image
-                  src={user.ProfileImage ? user.ProfileImage : "/profile.jpg"}
-                  alt=""
-                  className="rounded-full w-full h-full"
-                  fill
-                  sizes="fill"
-                />
-              </div>
-            );
-          })}
-          {item.users.length >= 1 ? (
+          {item.users &&
+            item.users.map((user) => {
+              return (
+                <div
+                  key={user.id}
+                  className="w-8 h-8 lg:w-12 lg:h-12 rounded-full -ml-3 hover:z-20 relative cursor-pointer hover:scale-110 hoverEffect"
+                >
+                  <Image
+                    src={user.ProfileImage ? user.ProfileImage : "/profile.jpg"}
+                    alt=""
+                    className="rounded-full w-full h-full"
+                    fill
+                    sizes="fill"
+                  />
+                </div>
+              );
+            })}
+          {item.users ? (
             <button
               className="mx-3 cursor-pointer"
               onClick={() => handleOpenCardMembers(item.id)}
