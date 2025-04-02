@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
-import { LuMenu, LuCircleUserRound } from "react-icons/lu";
+import React, { useState } from "react";
+import { LuMenu, LuCircleUserRound, LuChevronDown } from "react-icons/lu";
 import { IoNotificationsOutline } from "react-icons/io5";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
@@ -18,6 +18,8 @@ import Notification from "./Notification";
 
 const ActionView = () => {
   const darkmood = useAppSelector((state) => state.theme.darkmood);
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const { setTheme } = useTheme();
   const { data: session } = useSession();
@@ -33,7 +35,31 @@ const ActionView = () => {
     <div className="flex items-center gap-3 relative">
       {session ? (
         // ts-ignore
-        <button onClick={handleLogout}>{session.user?.username}</button>
+        <div className="relative">
+          <button
+            className="flex items-center gap-1 cursor-pointer z-20"
+            onClick={() => setOpenDropdown(!openDropdown)}
+          >
+            <span>{session.user?.username}</span> <LuChevronDown />
+          </button>
+
+          {openDropdown && (
+            <ul className="absolute flex flex-col top-full right-0 w-[150px] bg-zinc-200 dark:bg-zinc-600/60 rounded-sm z-50 ">
+              <Link
+                className="p-2 hover:bg-zinc-400 hoverEffect cursor-pointer rounded-t-sm hover:rounded-t-sm"
+                href="profile"
+              >
+                Profile
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="p-2 text-start hover:bg-zinc-400 hoverEffect cursor-pointer rounded-b-sm hover:rounded-b-sm"
+              >
+                Logout
+              </button>
+            </ul>
+          )}
+        </div>
       ) : (
         <Link href="/register">
           <LuCircleUserRound size={24} />

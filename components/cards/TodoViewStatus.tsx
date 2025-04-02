@@ -36,7 +36,7 @@ const TodoViewStatus = ({ item }: Props) => {
 
   return (
     <div className="flex items-center gap-2">
-      <button>
+      <button className="cursor-pointer">
         <LuTrash onClick={() => DeleteTask(item.id)} size={22} />
       </button>
       {item.status === "created" ? (
@@ -53,14 +53,7 @@ const TodoViewStatus = ({ item }: Props) => {
         >
           <LucideCheckCheck size={24} />
         </button>
-      ) : (
-        <button
-          className="cursor-pointer"
-          onClick={() => dispatch(handleDeleteTask(item.id))}
-        >
-          <LuTrash size={24} />
-        </button>
-      )}
+      ) : null}
     </div>
   );
 };
