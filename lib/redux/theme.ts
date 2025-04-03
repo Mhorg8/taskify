@@ -9,6 +9,7 @@ interface InitialState {
   uploadChatDocument: boolean;
   notificationModalStatus: boolean;
   addNewMemberModal: boolean;
+  profileDropdown: boolean;
 }
 
 const initialState: InitialState = {
@@ -21,6 +22,7 @@ const initialState: InitialState = {
   uploadChatDocument: false,
   notificationModalStatus: false,
   addNewMemberModal: false,
+  profileDropdown: false,
 };
 
 const themeSlice = createSlice({
@@ -57,6 +59,9 @@ const themeSlice = createSlice({
     toggleAddNewMemberModal(state) {
       state.addNewMemberModal = !state.addNewMemberModal;
     },
+    toggleProfileDropdowm(state, action: PayloadAction<boolean>) {
+      state.profileDropdown = action ? action.payload : !state.profileDropdown;
+    },
   },
 });
 
@@ -70,5 +75,6 @@ export const {
   toggleUploadDocument,
   toggleNotificationModal,
   toggleAddNewMemberModal,
+  toggleProfileDropdowm,
 } = themeSlice.actions;
 export default themeSlice.reducer;

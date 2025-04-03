@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LuMenu, LuCircleUserRound, LuChevronDown } from "react-icons/lu";
 import { IoNotificationsOutline } from "react-icons/io5";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import {
   toggleDarkmood,
   toggleNotificationModal,
+  toggleProfileDropdowm,
   toggleSidebarStatus,
 } from "@/lib/redux/theme";
 import { Switch } from "@/components/ui/switch";
@@ -18,13 +19,13 @@ import Notification from "./Notification";
 
 const ActionView = () => {
   const darkmood = useAppSelector((state) => state.theme.darkmood);
-  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
   const { setTheme } = useTheme();
   const { data: session } = useSession();
-  const notificationModal = useAppSelector(
-    (state) => state.theme.notificationModalStatus
+
+  useEffect;
+  const { notificationModalStatus, profileDropdown } = useAppSelector(
+    (state) => state.theme
   );
 
   function handleLogout() {
@@ -38,12 +39,12 @@ const ActionView = () => {
         <div className="relative">
           <button
             className="flex items-center gap-1 cursor-pointer z-20"
-            onClick={() => setOpenDropdown(!openDropdown)}
+            onClick={() => dispatch(toggleProfileDropdowm(!profileDropdown))}
           >
             <span>{session.user?.username}</span> <LuChevronDown />
           </button>
 
-          {openDropdown && (
+          {profileDropdown && (
             <ul className="absolute flex flex-col top-full right-0 w-[150px] bg-zinc-200 dark:bg-zinc-600/60 rounded-sm z-50 ">
               <Link
                 className="p-2 hover:bg-zinc-400 hoverEffect cursor-pointer rounded-t-sm hover:rounded-t-sm"
@@ -90,7 +91,7 @@ const ActionView = () => {
         <LuMenu size={24} />
       </button>
 
-      {notificationModal && (
+      {notificationModalStatus && (
         <div className="min-w-[300px] max-w-[380x] absolute top-full mt-6 right-3/4 z-50 bg-white dark:bg-zinc-600 shadow-md rounded-sm">
           {notifications.map((notif) => {
             return <Notification key={notif.id} notif={notif} />;

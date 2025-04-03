@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 /* @plugin "tailwindcss-animate"; */
-
 @custom-variant dark (&:is(.dark *));
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -25,6 +24,9 @@
 
   .social-media-icon {
     @apply bg-black dark:bg-white dark:text-black text-white rounded-full p-4 hover:scale-110 cursor-pointer;
+  }
+  .profile-card-item {
+    @apply flex-1 cursor-pointer font-semibold bg-zinc-200/80 hover:bg-zinc-200  dark:bg-zinc-600/60 dark:hover:bg-zinc-300/40 p-7 w-full text-center;
   }
 }
 
@@ -73,7 +75,7 @@
 }
 
 .dark {
-  --background: oklch(0.0 0 1);
+  --background: oklch(0 0 1);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
