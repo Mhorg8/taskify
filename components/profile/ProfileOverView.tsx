@@ -10,7 +10,7 @@ const ProfileOverView = () => {
   const [editImageFlag, setEditImageFlag] = useState<boolean>(false);
 
   return (
-    <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full h-full ">
+    <div className="col-span-12 md:col-span-6 lg:col-span-3 w-full h-full dark:bg-zinc-800/90">
       {/* profile image and usernames */}
       <div className="flex flex-col items-center justify-center gap-4 py-6 border-b border-b-gray">
         <div
@@ -18,7 +18,10 @@ const ProfileOverView = () => {
           className="w-40 h-40 rounded-full bg-yellow relative"
         >
           {editImageFlag && (
-            <IoImageOutline size={24} className="absolute top-1/3 left-1/3 mt-4 ml-3 -translate-x-1/2 -translate-y-1/2" />
+            <IoImageOutline
+              size={24}
+              className="absolute top-1/3 left-1/3 mt-4 ml-3 -translate-x-1/2 -translate-y-1/2"
+            />
           )}
         </div>
         <div className="flex items-center gap-1">
