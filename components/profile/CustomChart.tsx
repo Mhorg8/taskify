@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [{ month: "january", desktop: 1200, mobile: 570 }];
+import { Task } from "@/types";
 
 const chartConfig = {
   desktop: {
@@ -30,9 +30,17 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function CustomChart() {
-  const totalVisitors = chartData[0].desktop + chartData[0].mobile;
+interface Props {
+  type1: Task[];
+  type2: Task[];
+}
 
+export default function CustomChart({ type1, type2 }: Props) {
+  const totalVisitors = type1.length + type2.length;
+  const chartData = [
+    { month: "january", compelted: type1.length, inProgress: type2.length },
+  ];
+  const compeletedPercentage = (totalVisitors / type1.length) * 100;
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -72,7 +80,7 @@ export default function CustomChart() {
                           y={(viewBox.cy || 0) + 4}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Tasks
                         </tspan>
                       </text>
                     );
@@ -81,14 +89,14 @@ export default function CustomChart() {
               />
             </PolarRadiusAxis>
             <RadialBar
-              dataKey="desktop"
+              dataKey="compelted"
               stackId="a"
               cornerRadius={5}
               fill="var(--color-yellow)"
               className="stroke-transparent stroke-2"
             />
             <RadialBar
-              dataKey="mobile"
+              dataKey="inProgress"
               fill="var(--color-red)"
               stackId="a"
               cornerRadius={5}
@@ -99,10 +107,11 @@ export default function CustomChart() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Compelted {compeletedPercentage}% this month{" "}
+          <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing total Task for the last 6 months
         </div>
       </CardFooter>
     </Card>

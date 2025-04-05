@@ -1,32 +1,49 @@
+"use client";
 import axios from "axios";
 import CustomChart from "./CustomChart";
-import { auth } from "@/auth";
-import { headers } from "next/headers";
+import { useEffect, useState } from "react";
+import { Task } from "@/types";
 
-const ProfileCharts = async () => {
-  const session = await auth();
+const ProfileCharts = () => {
+  const [createdTasks, setCreatedTasks] = useState<Task[]>([]);
+  const [inProgressTasks, setInProgressTasks] = useState<Task[]>([]);
 
-  const confiq = {
+  const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  if (session?.user) {
-    const userCards = await axios.post(
-      "http://localhost:3000/api/getTasks",
-      { id: session.user.id },
-      confiq
-    );
-    console.log(userCards);
-  }
+
+  const getTasks = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/addNewCard",
+        config
+      );
+      return response.data.tasks;
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasks: Task[] = await getTasks();
+
+      console.log(tasks);
+
+      setCreatedTasks(tasks.filter((task) => task.status === "created"));
+      setInProgressTasks(tasks.filter((task) => task.status === "in-progress"));
+    };
+
+    fetchTasks();
+  }, []);
 
   return (
-    <div
-      className="col-span-12 md:col-span-6 lg:col-span-9 w-full h-full bg-zinc-200
-   dark:bg-zinc-600/70 flex items-start py-7 justify-start container"
-    >
+    <div className="col-span-12 md:col-span-6 lg:col-span-9 w-full h-full bg-zinc-200 dark:bg-zinc-600/70 flex items-start py-7 justify-start container">
       <div>
-        <CustomChart />
+        <CustomChart type1={createdTasks} type2={inProgressTasks} />
       </div>
     </div>
   );

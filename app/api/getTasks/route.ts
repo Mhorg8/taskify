@@ -15,9 +15,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const currentUser = await client.user.findFirst({
+  const currentUser = await client.card.findFirst({
     where: { id: id as string },
-    include: { cards: true },
+    include: { users: true },
   });
 
   if (!currentUser) {

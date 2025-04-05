@@ -18,8 +18,6 @@ const CardsPage = () => {
   );
   const fetchTasks = async () => {
     const response = await axios.get("/api/addNewCard");
-
-    console.log(response.data.tasks);
     if (!response.data.isSucess) {
       toast.error(response.data.message);
     }
