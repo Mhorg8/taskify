@@ -1,4 +1,5 @@
 "use client";
+import { updateCardStatus } from "@/hooks";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import {
   changeToFinished,
@@ -34,23 +35,27 @@ const TodoViewStatus = ({ item }: Props) => {
     toast.success(response.data.message);
   }
 
+  function handleChangeStatus() {
+    if (item.status === "created") {
+      updateCardStatus("inprogress", item.id);
+      dispatch(changeToInprogress(item.id));
+    } else if (item.status === "inprogress") {
+      updateCardStatus("finished", item.id);
+      dispatch(changeToFinished(item.id));
+    }
+  }
+
   return (
     <div className="flex items-center gap-2">
       <button className="cursor-pointer">
         <LuTrash onClick={() => DeleteTask(item.id)} size={22} />
       </button>
       {item.status === "created" ? (
-        <button
-          className="cursor-pointer"
-          onClick={() => dispatch(changeToInprogress(item.id))}
-        >
+        <button className="cursor-pointer" onClick={handleChangeStatus}>
           <LuCheck size={24} />
         </button>
       ) : item.status === "inprogress" ? (
-        <button
-          className="cursor-pointer"
-          onClick={() => dispatch(changeToFinished(item.id))}
-        >
+        <button className="cursor-pointer" onClick={handleChangeStatus}>
           <LucideCheckCheck size={24} />
         </button>
       ) : null}

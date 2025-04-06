@@ -7,6 +7,9 @@ import TodoView from "./TodoView";
 import DropArea from "./DropArea";
 import { Column, Task } from "@/types";
 import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
+import axios from "axios";
+import { toast } from "sonner";
+import { updateCardStatus } from "@/hooks";
 
 interface Props {
   column: Column;
@@ -16,10 +19,14 @@ interface Props {
 
 const StatusColumn = ({ column, createTaskClassName, tasks }: Props) => {
   const dispatch = useAppDispatch();
+  const activeTask = useAppSelector((state) => state.tasks.draggedTask);
 
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+  const handleDrop = async (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    dispatch(changeTaskStatus(column.status));
+    if (activeTask) {
+      await updateCardStatus(column.id.toString(), activeTask.id.toString());
+      dispatch(changeTaskStatus(column.status));
+    }
   };
 
   return (
