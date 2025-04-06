@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "sonner";
 
 export async function updateCardStatus(status: string, id: string) {
   const config = {
@@ -17,4 +18,9 @@ export async function updateCardStatus(status: string, id: string) {
     req,
     config
   );
+  if (response.data.isSucess) {
+    toast.success(response.data.message);
+  } else {
+    toast.error(response.data.message);
+  }
 }

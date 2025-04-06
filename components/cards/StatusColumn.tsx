@@ -7,8 +7,6 @@ import TodoView from "./TodoView";
 import DropArea from "./DropArea";
 import { Column, Task } from "@/types";
 import { toggleOpenNewTaskModal } from "@/lib/redux/theme";
-import axios from "axios";
-import { toast } from "sonner";
 import { updateCardStatus } from "@/hooks";
 
 interface Props {
