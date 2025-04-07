@@ -18,22 +18,20 @@ const TaskPage = () => {
   const { addNewTaskModal, addNewMemberModal } = useAppSelector(
     (state) => state.theme
   );
-
   const fetchTasks = async () => {
-    setLoading(true);
     const response = await axios.get("/api/addNewCard");
     if (!response.data.isSucess) {
       toast.error(response.data.message);
     }
     dispatch(setTasks(response.data.tasks));
-    console.log(response.data.tasks);
-
     setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
+
     fetchTasks();
-  }, []);
+  }, [addNewTaskModal]);
 
   const handleCloseModalWithKey = useCallback(
     (e: KeyboardEvent) => {
@@ -79,6 +77,8 @@ const TaskPage = () => {
                 <div className="w-full col-span-12">
                   <h1 className="text-5xl uppercase">You not have card.</h1>
                 </div>
+              ) : loading ? (
+                <Loader />
               ) : (
                 tasks.map((task) => <TaskView key={task.id} task={task} />)
               )}

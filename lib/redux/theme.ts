@@ -3,7 +3,7 @@ interface InitialState {
   sidebarStatus: boolean;
   darkmood: "dark" | "light";
   newCardModal: boolean;
-  taskViewIsOpen: null | number;
+  taskViewIsOpen: null | string;
   addNewTaskModal: boolean;
   contextMenu: number | null;
   uploadChatDocument: boolean;
@@ -41,7 +41,7 @@ const themeSlice = createSlice({
     toggleOpenNewTaskModal(state) {
       state.newCardModal = !state.newCardModal;
     },
-    toogleOpenTaskView(state, action: PayloadAction<number | null>) {
+    toogleOpenTaskView(state, action: PayloadAction<string | null>) {
       state.taskViewIsOpen = action.payload;
     },
     toggleAddNewTask(state, action: PayloadAction<boolean>) {
