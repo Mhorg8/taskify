@@ -5,16 +5,12 @@ import { Checkbox } from "./ui/checkbox";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { toggleAddNewTask, toogleOpenTaskView } from "@/lib/redux/theme";
 import { AnimatePresence, motion } from "framer-motion";
-
-interface Task {
-  id: number;
-  task: string;
-}
+import { Task } from "@/types";
 
 interface CustomCollapsProps {
   tasks: Task[];
   title: string;
-  id: number;
+  id: number | string;
 }
 
 const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
@@ -34,7 +30,7 @@ const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
       <div className="mb-2 flex items-center justify-between">
         <p className="text-lg font-medium">Total task ({tasks.length})</p>
         <button
-          onClick={() => dispatch(toggleAddNewTask())}
+          onClick={() => dispatch(toggleAddNewTask(true))}
           type="button"
           className="px-3 py-1 hover:bg-stone-300 hoverEffect"
         >
@@ -45,7 +41,7 @@ const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
         <p className="text-lg ">{title}</p>
         <button
           type="button"
-          onClick={() => openDropdown(id)}
+          onClick={() => openDropdown(id as number)}
           aria-expanded={taskViewIsOpen === id}
         >
           {taskViewIsOpen === id ? <LuChevronUp /> : <LuChevronDown />}

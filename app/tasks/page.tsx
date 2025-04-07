@@ -1,16 +1,36 @@
 "use client";
+import Loader from "@/components/Loader";
 import NewTaskModal from "@/components/NewTaskModal";
 import TaskView from "@/components/TaskView";
-import { tempTasks } from "@/constant";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { setTasks } from "@/lib/redux/tasksSlice";
 import { toggleAddNewTask, toggleOpenNewTaskModal } from "@/lib/redux/theme";
-import React, { useEffect, useCallback } from "react";
+import axios from "axios";
+import React, { useEffect, useCallback, useState } from "react";
+import { toast } from "sonner";
 
 const TaskPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const tasks = useAppSelector((state) => state.tasks.tasks);
+
   const newTaskModalStatus = useAppSelector(
     (state) => state.theme.addNewTaskModal
   );
+
+  const fetchTasks = async () => {
+    setLoading(true);
+    const response = await axios.get("/api/addNewCard");
+    if (!response.data.isSucess) {
+      toast.error(response.data.message);
+    }
+    dispatch(setTasks(response.data.tasks));
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const handleCloseModalWithKey = useCallback(
     (e: KeyboardEvent) => {
@@ -45,10 +65,20 @@ const TaskPage = () => {
       {/* cards list */}
       <div className="px-10 relative">
         <h3 className="mb-10 text-4xl font-bold ">Card's list</h3>
-        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {tempTasks.map((task) => (
-            <TaskView key={task.id} task={task} />
-          ))}
+        <div className="w-full h-full">
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {tasks?.length < 1 || !tasks ? (
+                <div className="w-full col-span-12">
+                  <h1 className="text-5xl uppercase">You not have card.</h1>
+                </div>
+              ) : (
+                tasks.map((task) => <TaskView key={task.id} task={task} />)
+              )}
+            </div>
+          )}
         </div>
 
         {/* add new Task modal */}
