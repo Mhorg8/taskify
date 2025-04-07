@@ -55,6 +55,7 @@ export async function GET() {
   const allTask = await client.card.findMany({
     include: {
       users: true,
+      tasks: true,
     },
   });
 

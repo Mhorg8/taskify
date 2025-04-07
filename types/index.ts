@@ -8,6 +8,14 @@ export interface Task {
   createdAt: Date;
   updatedAt: Date;
   users: User[];
+  tasks: CardTask[];
+}
+
+export interface CardTask {
+  cardId: string;
+  id: string;
+  task: string;
+  status: boolean;
 }
 
 export interface Column {

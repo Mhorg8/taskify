@@ -5,12 +5,12 @@ import { Checkbox } from "./ui/checkbox";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { toggleAddNewTask, toogleOpenTaskView } from "@/lib/redux/theme";
 import { AnimatePresence, motion } from "framer-motion";
-import { Task } from "@/types";
+import { CardTask, Task } from "@/types";
 
 interface CustomCollapsProps {
-  tasks: Task[];
+  tasks: CardTask[];
+  id: number;
   title: string;
-  id: number | string;
 }
 
 const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
@@ -27,27 +27,6 @@ const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
 
   return (
     <div className="px-7 mt-5 text-black">
-      <div className="mb-2 flex items-center justify-between">
-        <p className="text-lg font-medium">Total task ({tasks.length})</p>
-        <button
-          onClick={() => dispatch(toggleAddNewTask(true))}
-          type="button"
-          className="px-3 py-1 hover:bg-stone-300 hoverEffect"
-        >
-          New
-        </button>
-      </div>
-      <div className="flex items-center justify-between w-full border border-zinc-600 p-2">
-        <p className="text-lg ">{title}</p>
-        <button
-          type="button"
-          onClick={() => openDropdown(id as number)}
-          aria-expanded={taskViewIsOpen === id}
-        >
-          {taskViewIsOpen === id ? <LuChevronUp /> : <LuChevronDown />}
-        </button>
-      </div>
-
       <AnimatePresence>
         {taskViewIsOpen === id && (
           <motion.ul
@@ -60,7 +39,7 @@ const CustomCollaps: React.FC<CustomCollapsProps> = ({ tasks, title, id }) => {
             {tasks.map((task) => (
               <li
                 key={task.id}
-                className="flex items-center justify-between w-full border border-zinc-600 p-2 hover:bg-zinc-300 dark:hover:bg-white/80"
+                className="flex items-center justify-between w-full border dark:bg-zinc-700 dark:text-white border-zinc-600 p-2 hover:bg-zinc-300 dark:hover:bg-white/80"
               >
                 <p className="text-lg ">{task.task}</p>
                 <Checkbox className="bg-white p-2" />

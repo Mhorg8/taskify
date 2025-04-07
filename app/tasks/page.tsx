@@ -1,10 +1,11 @@
 "use client";
+import AddNewMemberModal from "@/components/cards/AddNewMemberModal";
 import Loader from "@/components/Loader";
 import NewTaskModal from "@/components/NewTaskModal";
 import TaskView from "@/components/TaskView";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { setTasks } from "@/lib/redux/tasksSlice";
-import { toggleAddNewTask, toggleOpenNewTaskModal } from "@/lib/redux/theme";
+import { toggleAddNewMemberModal, toggleAddNewTask } from "@/lib/redux/theme";
 import axios from "axios";
 import React, { useEffect, useCallback, useState } from "react";
 import { toast } from "sonner";
@@ -14,8 +15,8 @@ const TaskPage = () => {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.tasks.tasks);
 
-  const newTaskModalStatus = useAppSelector(
-    (state) => state.theme.addNewTaskModal
+  const { addNewTaskModal, addNewMemberModal } = useAppSelector(
+    (state) => state.theme
   );
 
   const fetchTasks = async () => {
@@ -25,6 +26,8 @@ const TaskPage = () => {
       toast.error(response.data.message);
     }
     dispatch(setTasks(response.data.tasks));
+    console.log(response.data.tasks);
+
     setLoading(false);
   };
 
@@ -36,6 +39,8 @@ const TaskPage = () => {
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         dispatch(toggleAddNewTask(false));
+
+        dispatch(toggleAddNewMemberModal(false));
       }
     },
     [dispatch]
@@ -63,7 +68,7 @@ const TaskPage = () => {
       </div>
 
       {/* cards list */}
-      <div className="px-10 relative">
+      <div className="px-10 relative ">
         <h3 className="mb-10 text-4xl font-bold ">Card's list</h3>
         <div className="w-full h-full">
           {loading ? (
@@ -82,7 +87,8 @@ const TaskPage = () => {
         </div>
 
         {/* add new Task modal */}
-        {newTaskModalStatus && <NewTaskModal />}
+        {addNewTaskModal && <NewTaskModal />}
+        {addNewMemberModal && <AddNewMemberModal />}
       </div>
     </div>
   );

@@ -56,8 +56,8 @@ const themeSlice = createSlice({
     toggleNotificationModal(state) {
       state.notificationModalStatus = !state.notificationModalStatus;
     },
-    toggleAddNewMemberModal(state) {
-      state.addNewMemberModal = !state.addNewMemberModal;
+    toggleAddNewMemberModal(state, action: PayloadAction<boolean>) {
+      state.addNewMemberModal = action.payload;
     },
     toggleProfileDropdowm(state, action: PayloadAction<boolean>) {
       state.profileDropdown = action ? action.payload : !state.profileDropdown;
