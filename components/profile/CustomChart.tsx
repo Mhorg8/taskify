@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Task } from "@/types";
+import { CardTask, Task } from "@/types";
 
 const chartConfig = {
   desktop: {
@@ -31,8 +31,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 interface Props {
-  type1: Task[];
-  type2: Task[];
+  type1: Task[] | CardTask[];
+  type2: Task[] | CardTask[];
 }
 
 export default function CustomChart({ type1, type2 }: Props) {
@@ -45,7 +45,6 @@ export default function CustomChart({ type1, type2 }: Props) {
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Radial Chart - Stacked</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
